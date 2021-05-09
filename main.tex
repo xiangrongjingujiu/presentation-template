@@ -1,0 +1,121 @@
+% 中文使用ctexbeamer，compiler选择XeLatex
+% 英文选择beamer，compiler选择pdfLatex
+% Latex入门教程：https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+% Beamer入门教程：https://www.overleaf.com/learn/latex/Beamer
+% 可用字体大小： 8pt, 9pt, 10pt, 11pt, 12pt, 14pt, 17pt, 20pt. 默认字体大小： 11pt
+% “%”后面的内容都是注释，编译时不起作用，不会影响输出结果。在开头添加“%”，等价于删除这一行；在开头删除“%”，等价于添加这一行。通过删除和添加“%”，可以快速添加和删除命令。
+
+
+\documentclass[10pt]{ctexbeamer} % chinese template
+%\documentclass[10pt]{beamer} % english template
+
+% note taking tool 1: \more{this is your notes}
+% manual: https://github.com/xiangrongjingujiu/latex-note-plus
+\usepackage[color=blue,smaller]{notePlus}  
+
+% note taking tool 2: \add{this is your notes}
+% manual: https://github.com/xiangrongjingujiu/latex-add-notes-simple
+\usepackage[color=purple]{addnote} 
+
+% note taking tool 3: \note{this is your notes} inside frames:
+% \note commands accumulate and append a single note page 
+% after the current slide; If you use multiple \note commands on one slide,
+% they “accumulate” and are all shown on the same note.
+
+%\setbeameroption{hide notes} % 隐藏笔记
+%\setbeameroption{show only notes} % 只输出笔记
+\setbeameroption{show notes} % 在每一页的演示文稿的后面，附上这一页上做的笔记
+
+% 笔记会单独输出在一页幻灯片上，为了在一页笔记幻灯片上容纳更多的文字，需要去除以供展示所用的幻灯片上的页眉页脚等装饰，即使用“plain”模式
+\setbeamertemplate{note page}[plain]
+
+% smaller note page font, accommodate more text
+% 为了在一页笔记幻灯片上容纳更多的文字，需要设置笔记的字体小一些，这样可以容纳更多文字
+% 字体从小到大为：\tiny	、\scriptsize、\footnotesize、\small、\normalsize
+% 更多字体大小，参考https://www.overleaf.com/learn/latex/Font_sizes,_families,_and_styles
+\setbeamerfont{note page}{size=\scriptsize}
+% 修正在演示文稿中使用引用的时候出现的故障，不需要修改
+\makeatletter
+\defbeameroption{show only notes}[]
+{
+  \beamer@notestrue
+  \beamer@notesnormalsfalse
+}
+\makeatother
+
+
+\mode<presentation>
+{
+  \usetheme{Darmstadt}      % 主题or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default}  % 配色主题or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % 字体主题or try serif, structurebold, ...
+  \setbeamertemplate{caption}[numbered]
+} 
+% 在每个章节的开头，显示目录以及当前章节的位置
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{目录}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{comment}
+\setlength\parindent{24pt}
+
+\title{PPT模板展示}
+
+\author{方鸿渐\inst{2} \and 苏文纨\inst{1} \and 唐晓芙\inst{1} \and 孙柔嘉\inst{2}}
+
+\institute{
+  \inst{1}
+  上海大户人家
+  \and
+  \inst{2}
+  三闾大学
+}
+
+\date{2020}
+
+\setcounter{tocdepth}{2} %展示目录的时候，展示到第二级小标题
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+
+\begin{frame}{目录}
+ \tableofcontents
+\end{frame}
+
+
+
+    
+\section{背景}
+\begin{frame}{第一张}
+    这是第一张幻灯片 \more{在本页的笔记} 
+    
+    笔记之后\add{使用addnote不允许换行}
+
+    \note{这是第一张幻灯片的笔记，在下一页
+    }
+\end{frame}
+\begin{frame}{第二张}
+    这是第二张幻灯片，注意第一张和第二张幻灯片都放在了一级标题“背景”下面
+    \note{这是第二张幻灯片的笔记
+    }
+\end{frame}
+
+\section{目标}
+\subsection{目标一}
+\begin{frame}{第三张}
+    第三张幻灯片放在一级标题“目标”下面的二级标题“目标一”下面
+\end{frame}
+\subsection{目标二}
+\begin{frame}{第四张}
+    第四张幻灯片放在了一级标题“目标”下面的二级标题“目标二”下面
+\end{frame}
+\end{document}
